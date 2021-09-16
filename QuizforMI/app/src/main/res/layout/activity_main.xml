@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="キーワード入力"
+        android:text="画像を読み込む"
         android:textSize="24sp" />
 
     <Space
@@ -28,6 +28,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="おすすめ"
+        android:text="単語帳"
         android:textSize="24sp" />
 </LinearLayout>

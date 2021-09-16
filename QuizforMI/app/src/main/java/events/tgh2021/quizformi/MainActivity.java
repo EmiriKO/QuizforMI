@@ -14,24 +14,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button bKeyword = findViewById(R.id.button);
-        bKeyword.setOnClickListener(
+        Button bRecognition = findViewById(R.id.button);
+        bRecognition.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intentMaintoKeyword = new Intent(MainActivity.this, KeywordActivity.class);
-                        startActivity(intentMaintoKeyword);
+                        Intent intentMaintoRecognition = new Intent(MainActivity.this, RecognitionActivity.class);
+                        startActivity(intentMaintoRecognition);
                     }
                 }
         );
 
-        Button bRecommendation = findViewById(R.id.button2);
-        bRecommendation.setOnClickListener(
+        Button bFlashcard = findViewById(R.id.button2);
+        bFlashcard.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intentMaintoRecommendation = new Intent(MainActivity.this, RecommendationActivity.class);
-                        startActivity(intentMaintoRecommendation);
+                        Intent intentMaintoFlashcard = new Intent(MainActivity.this, FlashcardActivity.class);
+                        startActivity(intentMaintoFlashcard);
                     }
                 }
         );

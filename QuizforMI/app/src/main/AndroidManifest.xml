@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuizforMI">
         <activity
-            android:name=".RecommendationActivity"
+            android:name=".FlashcardActivity"
             android:exported="true" />
         <activity
-            android:name=".KeywordActivity"
+            android:name=".RecognitionActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
