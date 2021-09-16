@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/layout/activity_keyword.xml" value="0.2427536231884058" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_recognition.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_recommendation.xml" value="0.2079785570704858" />
       </map>
     </option>
