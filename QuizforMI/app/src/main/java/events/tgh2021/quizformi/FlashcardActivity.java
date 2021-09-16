@@ -37,13 +37,16 @@ class PreferenceUtils {
         SharedPreferences dataStore = context.getSharedPreferences("MIZ", Context.MODE_PRIVATE);
         String keywordsList = dataStore.getString("keywords", "");//これまでのkeywordsデータを取得
 
-        String[] keywords = (String[]) Arrays.stream(keywordsList.split(",")).filter(str -> !str.isEmpty()).toArray();
+        String[] keywords =keywordsList.split(",");
 
         Map<String, String> englishList = new HashMap() {
         };
 
-        for (int i = 0; i < keywords.length; i++) {
-            englishList.put(keywords[i], dataStore.getString(keywords[i], ""));
+        for (String keyword : keywords) {
+            if(keyword.isEmpty()){
+                continue;
+            };
+            englishList.put(keyword, dataStore.getString(keyword, ""));
         }
         ;
         return englishList;
@@ -57,9 +60,6 @@ public class FlashcardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flashcard);
 
-        getSharedPreferences("MIZ",MODE_PRIVATE).edit().clear().apply();
-
-        PreferenceUtils.save(this, "apple", "りんご");
         Map<String,String> word = PreferenceUtils.load(this);
 
 
