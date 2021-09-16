@@ -7,21 +7,46 @@
     android:orientation="vertical"
     tools:context=".RecognitionActivity">
 
-    <TextView
-        android:id="@+id/textView3"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Apple" />
+        android:layout_height="514dp"
+        tools:context=".RecognitionActivity">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/text_target"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apple"
+            android:textSize="34sp" />
 
-    <Button
-        android:id="@+id/button4"
+        <Button
+            android:id="@+id/button_translate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="翻訳"
+            android:textSize="34sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="翻訳" />
+        android:layout_height="match_parent"
+        tools:context=".RecognitionActivity">
+
+        <TextView
+            android:id="@+id/text_translated"
+            android:layout_width="wrap_content"
+            android:layout_height="41dp"
+            android:text="TextView"
+            android:textSize="34sp" />
+
+        <Button
+            android:id="@+id/button_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="保存"
+            android:textSize="34sp" />
+    </LinearLayout>
+
 </LinearLayout>

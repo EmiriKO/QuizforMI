@@ -1,16 +1,12 @@
 package events.tgh2021.quizformi;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.mlkit.common.model.DownloadConditions;
 import com.google.mlkit.nl.translate.TranslateLanguage;
@@ -25,7 +21,18 @@ public class RecognitionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recognition);
 
-        Button bTranslate = findViewById(R.id.button4);
+        // 保存ボタンの無効化
+        Button bSave = (Button) findViewById(R.id.button_save);
+        bSave.setEnabled(false);
+        bSave.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                    }
+                }
+        );
+
+        Button bTranslate = findViewById(R.id.button_translate);
         bTranslate.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -46,14 +53,15 @@ public class RecognitionActivity extends AppCompatActivity {
                                         (OnSuccessListener) v -> {
                                             // Model downloaded successfully. Okay to start translating.
                                             // (Set a flag, unhide the translation UI, etc.)
-                                            TextView targetText = findViewById(R.id.textView3);
+                                            TextView targetText = findViewById(R.id.text_target);
                                             String text = targetText.getText().toString();
                                             englishJapaneseTranslator.translate(text)
                                                     .addOnSuccessListener(
                                                             (OnSuccessListener) translatedText -> {
                                                                 // Translation successful.
-                                                                TextView result = findViewById(R.id.textView2);
+                                                                TextView result = findViewById(R.id.text_translated);
                                                                 result.setText((CharSequence) translatedText);
+                                                                bSave.setEnabled(true);
                                                             })
                                                     .addOnFailureListener(
                                                             e -> {
