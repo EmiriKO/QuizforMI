@@ -3,9 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../Library/Android/sdk/platforms/android-30/data/res/layout/popup_menu_item_layout.xml" value="0.23958333333333334" />
         <entry key="app/src/main/res/layout/activity_keyword.xml" value="0.2427536231884058" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_recognition.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_recommendation.xml" value="0.2079785570704858" />
+        <entry key="app/src/main/res/layout/popup_layout.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/popup_window.xml" value="0.23958333333333334" />
       </map>
     </option>
   </component>
