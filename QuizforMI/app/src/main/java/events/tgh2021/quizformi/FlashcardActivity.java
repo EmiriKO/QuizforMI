@@ -2,6 +2,7 @@ package events.tgh2021.quizformi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -17,7 +18,8 @@ public class FlashcardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flashcard);
 
-
+        // 書き込み
+        getPreferences(Context.MODE_PRIVATE).edit().putString("keyword", "testKeyword").apply();
 
         ListView listView = new ListView(this);
         setContentView(listView);
