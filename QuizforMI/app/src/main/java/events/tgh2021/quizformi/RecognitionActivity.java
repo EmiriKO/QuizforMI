@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,13 +23,29 @@ public class RecognitionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recognition);
 
-        // 保存ボタンの無効化
+        //spinnerの設定
+        String[] arraySpinner = new String[] {
+                "I", "ate", "an", "apple", "yesterday", "at", "home"
+        };
+        Spinner s = (Spinner) findViewById(R.id.spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, arraySpinner);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        s.setAdapter(adapter);
+
+        TextView wordSelected = findViewById(R.id.text_selected);
+        TextView result = findViewById(R.id.text_translated);
+
+        // 保存ボタンの設定
         Button bSave = (Button) findViewById(R.id.button_save);
         bSave.setEnabled(false);
         bSave.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        wordSelected.setText("");
+                        result.setText("");
+                        bSave.setEnabled(false);
                     }
                 }
         );
@@ -53,13 +71,13 @@ public class RecognitionActivity extends AppCompatActivity {
                                         (OnSuccessListener) v -> {
                                             // Model downloaded successfully. Okay to start translating.
                                             // (Set a flag, unhide the translation UI, etc.)
-                                            TextView targetText = findViewById(R.id.text_target);
-                                            String text = targetText.getText().toString();
+                                            Spinner spinner = (Spinner)findViewById(R.id.spinner);
+                                            String text = spinner.getSelectedItem().toString();
                                             englishJapaneseTranslator.translate(text)
                                                     .addOnSuccessListener(
                                                             (OnSuccessListener) translatedText -> {
                                                                 // Translation successful.
-                                                                TextView result = findViewById(R.id.text_translated);
+                                                                wordSelected.setText((CharSequence) text);
                                                                 result.setText((CharSequence) translatedText);
                                                                 bSave.setEnabled(true);
                                                             })
