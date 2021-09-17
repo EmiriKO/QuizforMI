@@ -7,17 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import java.io.BufferedInputStream;
-import android.media.Image;
-//import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-//import android.view.Menu;
 import android.widget.ImageView;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.os.Bundle;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.google.android.gms.tasks.OnFailureListener;
