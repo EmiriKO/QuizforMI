@@ -7,10 +7,22 @@
     android:orientation="vertical"
     tools:context=".RecognitionActivity">
 
+    <TextView
+        android:id="@+id/text_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="単語を選択してください"
+        android:textSize="34sp" />
+
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"
-        android:layout_height="365dp" />
+        android:layout_height="106dp"
+        android:backgroundTint="#6E6D6D" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="231dp" />
 
     <Button
         android:id="@+id/button_translate"
