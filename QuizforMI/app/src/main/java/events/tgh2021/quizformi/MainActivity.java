@@ -34,12 +34,6 @@ import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 public class MainActivity extends AppCompatActivity {
     //追加
     private static final int REQUEST_GALLERY = 0;
-    private ImageView imageView;
-
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,59 +90,32 @@ public class MainActivity extends AppCompatActivity {
             try {
                 BufferedInputStream inputStream = new BufferedInputStream(getContentResolver().openInputStream(data.getData()));
                 Bitmap image = BitmapFactory.decodeStream(inputStream);
-                imageView.setImageBitmap(image);
                 TextRecognizer recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
 
                 InputImage recognizingImage = InputImage.fromBitmap(image, 0);
 
-                Task<Text> result =
-                        recognizer.process(recognizingImage)
-                                .addOnSuccessListener(new OnSuccessListener<Text>() {
-                                    @Override
-                                    public void onSuccess(Text visionText) {
-                                        // Task completed successfully
-                                        // ...
+                recognizer.process(recognizingImage)
+                        .addOnSuccessListener(visionText -> {
+                            System.out.println("onSuccess");
+
+                            List<String> listForElements = new ArrayList<>();
+                            for (Text.TextBlock block : visionText.getTextBlocks()) {
+                                for (Text.Line line : block.getLines()) {
+                                    for (Text.Element element : line.getElements()) {
+                                        listForElements.add(element.getText());
                                     }
-                                })
-                                .addOnFailureListener(
-                                        new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                // Task failed with an exception
-                                                // ...
-                                            }
-                                        });
-
-                List<String> listForElements = new ArrayList<String>();
-
-
-
-                String resultText = result.getResult().getText();
-                for (Text.TextBlock block : result.getResult().getTextBlocks()) {
-                    String blockText = block.getText();
-                    Point[] blockCornerPoints = block.getCornerPoints();
-                    Rect blockFrame = block.getBoundingBox();
-                    for (Text.Line line : block.getLines()) {
-                        String lineText = line.getText();
-                        Point[] lineCornerPoints = line.getCornerPoints();
-                        Rect lineFrame = line.getBoundingBox();
-                        for (Text.Element element : line.getElements()) {
-                            String elementText = element.getText();
-                            listForElements.add(elementText);
-                            Point[] elementCornerPoints = element.getCornerPoints();
-                            Rect elementFrame = element.getBoundingBox();
-                        }
-                    }
-                }
-
-                Intent intentMaintoRecognition = new Intent(MainActivity.this, RecognitionActivity.class);
-                intentMaintoRecognition.putExtra("listForElements", (ArrayList)listForElements);
-                startActivity(intentMaintoRecognition);
-
-
+                                }
+                            }
+                            Intent intentMaintoRecognition = new Intent(MainActivity.this, RecognitionActivity.class);
+                            intentMaintoRecognition.putExtra("listForElements", (ArrayList)listForElements);
+                            startActivity(intentMaintoRecognition);
+                        })
+                        .addOnFailureListener(e -> {
+                            System.out.println("onFailure");
+                        });
 
             } catch (Exception e) {
-
+                System.out.println(e);
             }
         }
     }
