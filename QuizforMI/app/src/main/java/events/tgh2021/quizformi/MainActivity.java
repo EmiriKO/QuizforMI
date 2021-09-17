@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import java.io.BufferedInputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
@@ -111,6 +114,10 @@ public class MainActivity extends AppCompatActivity {
                                             }
                                         });
 
+                List<String> listForElements = new ArrayList<String>();
+
+
+
                 String resultText = result.getResult().getText();
                 for (Text.TextBlock block : result.getResult().getTextBlocks()) {
                     String blockText = block.getText();
@@ -122,11 +129,16 @@ public class MainActivity extends AppCompatActivity {
                         Rect lineFrame = line.getBoundingBox();
                         for (Text.Element element : line.getElements()) {
                             String elementText = element.getText();
+                            listForElements.add(elementText);
                             Point[] elementCornerPoints = element.getCornerPoints();
                             Rect elementFrame = element.getBoundingBox();
                         }
                     }
                 }
+
+                Intent intentMaintoRecognition = new Intent(MainActivity.this, RecognitionActivity.class);
+                intentMaintoRecognition.putExtra("listForElements", (ArrayList)listForElements);
+                startActivity(intentMaintoRecognition);
 
 
 

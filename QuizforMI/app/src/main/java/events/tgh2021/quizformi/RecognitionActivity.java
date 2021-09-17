@@ -2,6 +2,7 @@ package events.tgh2021.quizformi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -17,6 +18,7 @@ import com.google.mlkit.nl.translate.Translator;
 import com.google.mlkit.nl.translate.TranslatorOptions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecognitionActivity extends AppCompatActivity {
 
@@ -25,10 +27,12 @@ public class RecognitionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recognition);
 
+        Intent intentFromMainActivity = getIntent();
+        List<String> elementsList = intentFromMainActivity.getStringArrayListExtra("listForElements");
+        String[] elementsArray = elementsList.toArray(new String[elementsList.size()]);
+
         //spinnerの設定
-        String[] arraySpinner = new String[] {
-                "I", "ate", "an", "apple", "yesterday", "at", "home"
-        };
+        String[] arraySpinner = elementsArray;
         Spinner s = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, arraySpinner);
