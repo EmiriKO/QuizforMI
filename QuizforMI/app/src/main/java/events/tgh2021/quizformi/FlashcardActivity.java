@@ -1,31 +1,24 @@
 package events.tgh2021.quizformi;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.util.Pair;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Pair;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 class PreferenceUtils {
 
@@ -39,29 +32,26 @@ class PreferenceUtils {
         editor.apply();
     }
 
-    ;
-
     public static Map<String, String> load(Context context) {
         //表示するリストの取得
         SharedPreferences dataStore = context.getSharedPreferences("MIZ", Context.MODE_PRIVATE);
         String keywordsList = dataStore.getString("keywords", "");//これまでのkeywordsデータを取得
 
-        String[] keywords =keywordsList.split(",");
+        String[] keywords = keywordsList.split(",");
 
         Map<String, String> englishList = new HashMap() {
         };
 
         for (String keyword : keywords) {
-            if(keyword.isEmpty()){
+            if (keyword.isEmpty()) {
                 continue;
-            };
+            }
             englishList.put(keyword, dataStore.getString(keyword, ""));
         }
-        ;
         return englishList;
     }
 
-};
+}
 
 public class FlashcardActivity extends AppCompatActivity {
     @Override
@@ -69,7 +59,7 @@ public class FlashcardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flashcard);
 
-        Map<String,String> word = PreferenceUtils.load(this);
+        Map<String, String> word = PreferenceUtils.load(this);
 
         List testData = Arrays.asList(new Pair("keyword1", "translated1"), new Pair("keyword2", "translated2"));
 
@@ -120,6 +110,7 @@ class WordListAdapter extends ListAdapter<Pair<String, String>, WordListAdapter.
                         @NonNull Pair<String, String> oldWord, @NonNull Pair<String, String> newWord) {
                     return oldWord.first.equals(newWord.first);
                 }
+
                 @Override
                 public boolean areContentsTheSame(
                         @NonNull Pair<String, String> oldWord, @NonNull Pair<String, String> newWord) {
