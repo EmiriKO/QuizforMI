@@ -15,10 +15,13 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 class PreferenceUtils {
 
@@ -61,12 +64,16 @@ public class FlashcardActivity extends AppCompatActivity {
 
         Map<String, String> word = PreferenceUtils.load(this);
 
-        List testData = Arrays.asList(new Pair("keyword1", "translated1"), new Pair("keyword2", "translated2"));
+        List<Pair<String, String>> wordList = word.entrySet().stream()
+                .map(it -> new Pair<>(it.getKey(), it.getValue()))
+                .collect(Collectors.toCollection(ArrayList::new));
+
+
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         WordListAdapter adapter = new WordListAdapter();
         recyclerView.setAdapter(adapter);
-        adapter.submitList(testData);
+        adapter.submitList(wordList);
     }
 }
 
