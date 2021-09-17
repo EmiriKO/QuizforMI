@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button bRecognition = findViewById(R.id.button);
+        Button bRecognition = findViewById(R.id.button_recognition);
         bRecognition.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        Button bFlashcard = findViewById(R.id.button2);
+        Button bFlashcard = findViewById(R.id.button_flashcard);
         bFlashcard.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
