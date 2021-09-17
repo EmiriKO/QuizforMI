@@ -3,11 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_flashcard.xml" value="0.1296875" />
+        <entry key="app/src/main/res/layout/activity_flashcard.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_keyword.xml" value="0.2427536231884058" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_recognition.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_recommendation.xml" value="0.2079785570704858" />
-        <entry key="app/src/main/res/layout/word_view_holder.xml" value="0.23148299422895496" />
+        <entry key="app/src/main/res/layout/word_view_holder.xml" value="0.1" />
       </map>
     </option>
   </component>

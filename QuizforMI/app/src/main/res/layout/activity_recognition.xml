@@ -7,51 +7,67 @@
     android:orientation="vertical"
     tools:context=".RecognitionActivity">
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="46dp" />
+
     <TextView
         android:id="@+id/text_hint"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="単語を選択してください"
-        android:textSize="34sp" />
+        android:textSize="24sp" />
 
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"
         android:layout_height="106dp"
+        android:layout_gravity="center"
         android:backgroundTint="#6E6D6D" />
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="231dp" />
+        android:layout_height="214dp" />
 
     <Button
         android:id="@+id/button_translate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        app:backgroundTint="#004460"
         android:text="翻訳"
-        android:textSize="34sp" />
+        android:textSize="24sp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="29dp" />
 
     <TextView
         android:id="@+id/text_selected"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="34sp" />
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/text_translated"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="34sp" />
+        android:textSize="24sp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="31dp" />
 
     <Button
         android:id="@+id/button_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        app:backgroundTint="#004460"
         android:text="保存"
-        android:textSize="34sp" />
+        android:textSize="24sp" />
 
 </LinearLayout>

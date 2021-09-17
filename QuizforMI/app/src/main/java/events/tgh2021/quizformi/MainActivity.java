@@ -43,6 +43,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ImageView imageView1 = findViewById(R.id.logo1);
+        imageView1.setImageResource(R.drawable.pictionary_);
+        ImageView imageView2 = findViewById(R.id.logo2);
+        imageView2.setImageResource(R.drawable.pictionary_for_mi_logo);
+
 
         Button bRecognition = findViewById(R.id.button_recognition);
         bRecognition.setOnClickListener(
