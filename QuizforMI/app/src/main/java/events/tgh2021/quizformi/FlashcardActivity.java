@@ -1,22 +1,27 @@
 package events.tgh2021.quizformi;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.util.Pair;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Dictionary;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
+import java.util.stream.Collectors;
 
 class PreferenceUtils {
 
@@ -30,29 +35,26 @@ class PreferenceUtils {
         editor.apply();
     }
 
-    ;
-
     public static Map<String, String> load(Context context) {
         //表示するリストの取得
         SharedPreferences dataStore = context.getSharedPreferences("MIZ", Context.MODE_PRIVATE);
         String keywordsList = dataStore.getString("keywords", "");//これまでのkeywordsデータを取得
 
-        String[] keywords =keywordsList.split(",");
+        String[] keywords = keywordsList.split(",");
 
         Map<String, String> englishList = new HashMap() {
         };
 
         for (String keyword : keywords) {
-            if(keyword.isEmpty()){
+            if (keyword.isEmpty()) {
                 continue;
-            };
+            }
             englishList.put(keyword, dataStore.getString(keyword, ""));
         }
-        ;
         return englishList;
     }
 
-};
+}
 
 public class FlashcardActivity extends AppCompatActivity {
     @Override
@@ -60,22 +62,66 @@ public class FlashcardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flashcard);
 
-        Map<String,String> word = PreferenceUtils.load(this);
+        Map<String, String> word = PreferenceUtils.load(this);
+
+        List<Pair<String, String>> wordList = word.entrySet().stream()
+                .map(it -> new Pair<>(it.getKey(), it.getValue()))
+                .collect(Collectors.toCollection(ArrayList::new));
 
 
-        ListView listView = new ListView(this);
-        setContentView(listView);
 
-        /*
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, );
-
-        listView.setAdapter(arrayAdapter);
-        */
-
-
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        WordListAdapter adapter = new WordListAdapter();
+        recyclerView.setAdapter(adapter);
+        adapter.submitList(wordList);
     }
-
 }
 
+class WordListAdapter extends ListAdapter<Pair<String, String>, WordListAdapter.ViewHolder> {
+    public WordListAdapter() {
+        super(DIFF_CALLBACK);
+    }
 
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ViewHolder(LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.word_view_holder, parent, false));
+    }
 
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.bind(getItem(position));
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView keywordTextView;
+        private final TextView translatedTextView;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            keywordTextView = itemView.findViewById(R.id.keyword_word);
+            translatedTextView = itemView.findViewById(R.id.translated_word);
+        }
+
+        public void bind(Pair<String, String> wordPair) {
+            keywordTextView.setText(wordPair.first);
+            translatedTextView.setText(wordPair.second);
+        }
+    }
+
+    public static final DiffUtil.ItemCallback<Pair<String, String>> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<Pair<String, String>>() {
+                @Override
+                public boolean areItemsTheSame(
+                        @NonNull Pair<String, String> oldWord, @NonNull Pair<String, String> newWord) {
+                    return oldWord.first.equals(newWord.first);
+                }
+
+                @Override
+                public boolean areContentsTheSame(
+                        @NonNull Pair<String, String> oldWord, @NonNull Pair<String, String> newWord) {
+                    return oldWord.equals(newWord);
+                }
+            };
+}
