@@ -9,26 +9,45 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="262dp" />
+        android:layout_height="107dp" />
+
+    <ImageView
+        android:id="@+id/logo1"
+        android:layout_width="match_parent"
+        android:layout_height="164dp"
+        tools:srcCompat="@drawable/pictionary_" />
+
+    <ImageView
+        android:id="@+id/logo2"
+        android:layout_width="381dp"
+        android:layout_height="78dp"
+        android:layout_gravity="center"
+        tools:srcCompat="@drawable/pictionary_for_mi_logo" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="82dp" />
 
     <Button
         android:id="@+id/button_recognition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        app:backgroundTint="#004460"
         android:text="画像を読み込む"
         android:textSize="24sp" />
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="102dp" />
+        android:layout_height="53dp" />
 
     <Button
         android:id="@+id/button_flashcard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="単語帳"
+        app:backgroundTint="#004460"
+        android:text="辞書"
         android:textSize="24sp" />
 
 </LinearLayout>
