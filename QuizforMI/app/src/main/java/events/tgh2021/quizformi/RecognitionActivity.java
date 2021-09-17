@@ -16,6 +16,8 @@ import com.google.mlkit.nl.translate.Translation;
 import com.google.mlkit.nl.translate.Translator;
 import com.google.mlkit.nl.translate.TranslatorOptions;
 
+import java.util.ArrayList;
+
 public class RecognitionActivity extends AppCompatActivity {
 
     @Override
@@ -36,19 +38,9 @@ public class RecognitionActivity extends AppCompatActivity {
         TextView wordSelected = findViewById(R.id.text_selected);
         TextView result = findViewById(R.id.text_translated);
 
-        // 保存ボタンの設定
+        // 保存ボタン
         Button bSave = (Button) findViewById(R.id.button_save);
         bSave.setEnabled(false);
-        bSave.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        wordSelected.setText("");
-                        result.setText("");
-                        bSave.setEnabled(false);
-                    }
-                }
-        );
 
         Button bTranslate = findViewById(R.id.button_translate);
         bTranslate.setOnClickListener(
@@ -79,7 +71,20 @@ public class RecognitionActivity extends AppCompatActivity {
                                                                 // Translation successful.
                                                                 wordSelected.setText((CharSequence) text);
                                                                 result.setText((CharSequence) translatedText);
+                                                                //保存ボタンの設定
                                                                 bSave.setEnabled(true);
+                                                                bSave.setOnClickListener(
+                                                                        new View.OnClickListener() {
+                                                                            @Override
+                                                                            public void onClick(View view) {
+                                                                                PreferenceUtils.save(getApplicationContext(), text, String.valueOf(translatedText));
+                                                                                //PreferenceUtils.load(getApplicationContext());
+                                                                                wordSelected.setText("");
+                                                                                result.setText("");
+                                                                                bSave.setEnabled(false);
+                                                                            }
+                                                                        }
+                                                                );
                                                             })
                                                     .addOnFailureListener(
                                                             e -> {
